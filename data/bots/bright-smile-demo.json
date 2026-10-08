@@ -1,0 +1,13 @@
+{
+  "id": "bright-smile-demo",
+  "businessName": "Bright Smile Dental Clinic",
+  "greeting": "Hi! I'm the Bright Smile assistant. Ask me about our services, hours, insurance, or pricing. If I can't find an answer in our docs, I'll connect you with our team.",
+  "handoffEmail": "frontdesk@brightsmile-demo.example",
+  "allowedOrigins": [
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+    "https://localhost:3000"
+  ],
+  "docsPath": "data/sample-business/bright-smile-dental",
+  "unknownConfidenceThreshold": 4
+}

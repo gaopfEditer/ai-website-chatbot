@@ -1,0 +1,132 @@
+{
+  "botId": "test-retrieval-bot",
+  "updatedAt": "2026-10-08T03:26:12.220Z",
+  "chunks": [
+    {
+      "id": "0e9ff964-fd5e-4dc5-920a-698ab9563100",
+      "sourceId": "faq.html",
+      "title": "faq",
+      "sourcePath": "faq.html",
+      "text": "Frequently asked questions Sample data for demo only. Call (555) 014-7721 or use our online form at brightsmile-demo.example/book (demo link only). Younger children may be referred to a pediatric specialist. Mild sensitivity is common for 24–48 hours after in-office whitening. Implant placement is referred to Maple Grove Oral Surgery (partner)."
+    },
+    {
+      "id": "d7de3f30-dbbd-4d70-b422-d6a533ef7fa8",
+      "sourceId": "hours-and-location.md",
+      "title": "hours-and-location",
+      "sourcePath": "hours-and-location.md",
+      "text": "# Hours & Location (Sample Data) **Bright Smile Dental Clinic** 412 Oakview Lane, Suite 200 Maple Grove, ST 00000 **Phone:** (555) 014-7721 **Email:** frontdesk@brightsmile-demo.example"
+    },
+    {
+      "id": "784720d5-c851-4508-9740-88388e212edc",
+      "sourceId": "hours-and-location.md",
+      "title": "hours-and-location",
+      "sourcePath": "hours-and-location.md",
+      "text": "## Office hours | Day | Hours | |-----|-------| | Monday | 8:00 AM – 5:00 PM | | Tuesday | 8:00 AM – 6:00 PM | | Wednesday | 8:00 AM – 5:00 PM | | Thursday | 8:00 AM – 7:00 PM | | Friday | 8:00 AM – 3:00 PM | | Saturday | 9:00 AM – 1:00 PM (2nd & 4th Sat only) | | Sunday | Closed |"
+    },
+    {
+      "id": "62f7cd84-ad6f-4a7e-ba65-0c3020c1ffbe",
+      "sourceId": "hours-and-location.md",
+      "title": "hours-and-location",
+      "sourcePath": "hours-and-location.md",
+      "text": "## Parking Free parking in the Oakview Medical Plaza garage."
+    },
+    {
+      "id": "135e49eb-2126-4232-8995-5cbe2d819854",
+      "sourceId": "hours-and-location.md",
+      "title": "hours-and-location",
+      "sourcePath": "hours-and-location.md",
+      "text": "## Holidays (closed) We are closed on New Year's Day, Independence Day, Thanksgiving, and Christmas Day."
+    },
+    {
+      "id": "5baeb841-2764-4949-ba67-ccb253485064",
+      "sourceId": "insurance-faq.md",
+      "title": "insurance-faq",
+      "sourcePath": "insurance-faq.md",
+      "text": "# Insurance & Billing FAQ (Sample Data)"
+    },
+    {
+      "id": "396650ae-4862-44ba-8a0a-13dfcbcbba46",
+      "sourceId": "insurance-faq.md",
+      "title": "insurance-faq",
+      "sourcePath": "insurance-faq.md",
+      "text": "We are **in-network** with these fictional plans for demo purposes: - Maple Health PPO - River Valley Dental HMO - Summit Care Open Access Bring your member ID to your visit."
+    },
+    {
+      "id": "2df5bd77-6d12-4825-85bb-239a48684937",
+      "sourceId": "insurance-faq.md",
+      "title": "insurance-faq",
+      "sourcePath": "insurance-faq.md",
+      "text": "## Payment without insurance We accept cash, credit cards, and CarePlan financing (subject to approval). Payment is due at time of service unless a prior arrangement is documented."
+    },
+    {
+      "id": "93f35385-3b72-4086-8994-0a432b60b271",
+      "sourceId": "insurance-faq.md",
+      "title": "insurance-faq",
+      "sourcePath": "insurance-faq.md",
+      "text": "## Cancellation policy Please cancel or reschedule at least **24 hours** in advance. Late cancellations may incur a **$50** fee."
+    },
+    {
+      "id": "26a4eb48-32d6-4c4b-b62e-8d4a9ede83c4",
+      "sourceId": "insurance-faq.md",
+      "title": "insurance-faq",
+      "sourcePath": "insurance-faq.md",
+      "text": "## Records requests Email **records@brightsmile-demo.example** with your name and date of birth."
+    },
+    {
+      "id": "298915e3-df90-4527-8840-b9968ad8ad1e",
+      "sourceId": "new-patient-guide.pdf",
+      "title": "new-patient-guide",
+      "sourcePath": "new-patient-guide.pdf",
+      "text": "New Patient Guide (Sample Data) Bring insurance card and arrive 15 minutes early. First visit includes exam, cleaning, and X-rays when needed."
+    },
+    {
+      "id": "4d1dfcc4-dad6-4ef5-81b5-abdd2340e008",
+      "sourceId": "services.md",
+      "title": "services",
+      "sourcePath": "services.md",
+      "text": "# Bright Smile Dental — Services (Sample Data) Bright Smile Dental Clinic offers general and cosmetic dentistry for families in the fictional town of Maple Grove."
+    },
+    {
+      "id": "da6baf05-09c2-4043-89fa-a65711a17165",
+      "sourceId": "services.md",
+      "title": "services",
+      "sourcePath": "services.md",
+      "text": "## Preventive care - **New patient exam and cleaning** — $129 (sample price). - **Routine cleaning (every 6 months)** — $89 for established patients. - **Fluoride treatment (children)** — $35."
+    },
+    {
+      "id": "1670e832-21bf-4e20-bee3-147ff9743be9",
+      "sourceId": "services.md",
+      "title": "services",
+      "sourcePath": "services.md",
+      "text": "## Restorative - **Composite filling (1 surface)** — from $165. - **Crown (porcelain)** — from $980; we provide a written estimate after exam."
+    },
+    {
+      "id": "ee656227-8949-462f-9a76-2dff81bd60ff",
+      "sourceId": "services.md",
+      "title": "services",
+      "sourcePath": "services.md",
+      "text": "## Cosmetic - **Professional whitening (in-office)** — $450 per session."
+    },
+    {
+      "id": "8f68a817-1665-4f52-bcb2-f8de7ebe1626",
+      "sourceId": "services.md",
+      "title": "services",
+      "sourcePath": "services.md",
+      "text": "## Emergency We reserve same-day slots for **tooth pain, swelling, or broken teeth**. Call **(555) 014-7721** before 2:00 PM Mon–Fri for same-day availability."
+    },
+    {
+      "id": "49e7dd07-2aa9-4c3a-a218-2c99a126dd96",
+      "sourceId": "services.md",
+      "title": "services",
+      "sourcePath": "services.md",
+      "text": "## What we do not offer We do **not** provide orthodontic braces, oral surgery, or sleep-apnea appliances. We refer those cases to partner specialists."
+    },
+    {
+      "id": "80ad4d7a-27d4-4d63-89c4-a1755df7dc56",
+      "sourceId": "welcome.txt",
+      "title": "welcome",
+      "sourcePath": "welcome.txt",
+      "text": "Bright Smile Dental Clinic — Welcome (Sample Data) Our mission is comfortable, transparent dental care for Maple Grove families. New patients: arrive 15 minutes early with photo ID and insurance card. Forms are also available on our demo website."
+    }
+  ]
+}
