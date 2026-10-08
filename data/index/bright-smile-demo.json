@@ -1,9 +1,9 @@
 {
   "botId": "bright-smile-demo",
-  "updatedAt": "2026-10-08T03:45:17.399Z",
+  "updatedAt": "2026-10-08T03:56:24.119Z",
   "chunks": [
     {
-      "id": "5e958e7f-54cd-40d0-9f37-ef1fa73d149b",
+      "id": "877ce4d4-feac-4b1a-bbda-52ad98a5970b",
       "sourceId": "faq.html",
       "title": "faq",
       "heading": "How do I book an appointment?",
@@ -11,7 +11,7 @@
       "text": "How do I book an appointment?\n\nCall (555) 014-7721 or use our online form at brightsmile-demo.example/book (demo link only)."
     },
     {
-      "id": "e3246eb0-ee11-4c26-bd25-490daf165578",
+      "id": "43569120-5c8c-417d-b5d0-f14bff67e675",
       "sourceId": "faq.html",
       "title": "faq",
       "heading": "Do you see children?",
@@ -19,7 +19,7 @@
       "text": "Do you see children?\n\nYes. We welcome patients age 3 and older. Younger children may be referred to a pediatric specialist."
     },
     {
-      "id": "a7844fc2-1ad1-4a6e-979f-c640b62fa1ce",
+      "id": "28541790-9953-4882-b46c-137ee508027a",
       "sourceId": "faq.html",
       "title": "faq",
       "heading": "Is whitening safe for sensitive teeth?",
@@ -27,7 +27,7 @@
       "text": "Is whitening safe for sensitive teeth?\n\nWe assess sensitivity during a consult. Mild sensitivity is common for 24–48 hours after in-office whitening."
     },
     {
-      "id": "2b3e9d38-86ea-40bf-b3d0-9da7d98664d9",
+      "id": "6802e29c-daf7-4a1f-8bb7-496a5cc2cdb8",
       "sourceId": "faq.html",
       "title": "faq",
       "heading": "Do you offer dental implants?",
@@ -35,14 +35,14 @@
       "text": "Do you offer dental implants?\n\nNo. Implant placement is referred to Maple Grove Oral Surgery (partner)."
     },
     {
-      "id": "0032249a-2e28-4cfe-913b-6b92496ae3a4",
+      "id": "15ede450-10ae-4ced-a395-4b8591edd97d",
       "sourceId": "hours-and-location.md",
       "title": "hours-and-location",
       "sourcePath": "hours-and-location.md",
       "text": "# Hours & Location (Sample Data)\n\n**Bright Smile Dental Clinic**  \n412 Oakview Lane, Suite 200  \nMaple Grove, ST 00000  \n\n**Phone:** (555) 014-7721  \n**Email:** frontdesk@brightsmile-demo.example"
     },
     {
-      "id": "ab5fbc04-1a9a-44a0-ac61-68372b54d9fe",
+      "id": "a118020a-54a5-4d8f-9c4a-0529805d11e1",
       "sourceId": "hours-and-location.md",
       "title": "hours-and-location",
       "heading": "Office hours",
@@ -50,7 +50,7 @@
       "text": "## Office hours\n\n| Day | Hours |\n|-----|-------|\n| Monday | 8:00 AM – 5:00 PM |\n| Tuesday | 8:00 AM – 6:00 PM |\n| Wednesday | 8:00 AM – 5:00 PM |\n| Thursday | 8:00 AM – 7:00 PM |\n| Friday | 8:00 AM – 3:00 PM |\n| Saturday | 9:00 AM – 1:00 PM (2nd & 4th Sat only) |\n| Sunday | Closed |"
     },
     {
-      "id": "33491460-c3ef-4960-8c8f-ad1423ab0ed9",
+      "id": "d4906a3d-29c9-49e8-9b8b-279cfcb0ba40",
       "sourceId": "hours-and-location.md",
       "title": "hours-and-location",
       "heading": "Parking",
@@ -58,7 +58,7 @@
       "text": "## Parking\n\nFree parking in the Oakview Medical Plaza garage. Enter from Birch Street."
     },
     {
-      "id": "4a7d3762-541e-493c-8890-44be6b29b8d2",
+      "id": "2e2f831d-0901-4de0-934a-7d3aef30e5c3",
       "sourceId": "hours-and-location.md",
       "title": "hours-and-location",
       "heading": "Holidays (closed)",
@@ -66,14 +66,14 @@
       "text": "## Holidays (closed)\n\nWe are closed on New Year's Day, Independence Day, Thanksgiving, and Christmas Day."
     },
     {
-      "id": "53f9bcc4-a51f-4b62-a51c-01175c4b187b",
+      "id": "6fad5e83-25a0-4d5e-813e-bba4f247faa4",
       "sourceId": "insurance-faq.md",
       "title": "insurance-faq",
       "sourcePath": "insurance-faq.md",
       "text": "# Insurance & Billing FAQ (Sample Data)"
     },
     {
-      "id": "4e61665e-9ce9-432f-8f4f-a6d56ccf4c17",
+      "id": "305b363f-6391-49dc-9cc1-3e47328a7aad",
       "sourceId": "insurance-faq.md",
       "title": "insurance-faq",
       "heading": "Do you accept insurance?",
@@ -81,7 +81,7 @@
       "text": "## Do you accept insurance?\n\nWe are **in-network** with these fictional plans for demo purposes:\n\n- Maple Health PPO\n- River Valley Dental HMO\n- Summit Care Open Access\n\nBring your member ID to your visit. We file claims on your behalf."
     },
     {
-      "id": "6b9ab07f-43ee-4364-bc3c-9565a1938856",
+      "id": "6de0bae8-a786-4a69-9f3e-a68d68363a4c",
       "sourceId": "insurance-faq.md",
       "title": "insurance-faq",
       "heading": "Payment without insurance",
@@ -89,7 +89,7 @@
       "text": "## Payment without insurance\n\nWe accept cash, credit cards, and CarePlan financing (subject to approval). Payment is due at time of service unless a prior arrangement is documented."
     },
     {
-      "id": "3578606b-2cfb-480c-aaec-6c696aa1ffc8",
+      "id": "1cbb7291-6baa-4b01-9ae4-d3f35ae62957",
       "sourceId": "insurance-faq.md",
       "title": "insurance-faq",
       "heading": "Cancellation policy",
@@ -97,7 +97,7 @@
       "text": "## Cancellation policy\n\nPlease cancel or reschedule at least **24 hours** in advance. Late cancellations may incur a **$50** fee."
     },
     {
-      "id": "ab96be29-67db-48bf-869d-c456f574e228",
+      "id": "6435c109-f6a2-4441-a2dc-a738953e8e15",
       "sourceId": "insurance-faq.md",
       "title": "insurance-faq",
       "heading": "Records requests",
@@ -105,21 +105,21 @@
       "text": "## Records requests\n\nEmail **records@brightsmile-demo.example** with your name and date of birth. Allow 3 business days for copies."
     },
     {
-      "id": "459f8736-ca71-4c00-b7ce-97e9e2bc40d8",
+      "id": "ae684ef4-6e99-40a1-a628-034490a47ed8",
       "sourceId": "new-patient-guide.pdf",
       "title": "new-patient-guide",
       "sourcePath": "new-patient-guide.pdf",
       "text": "New Patient Guide (Sample Data)  Bring insurance card and arrive 15 minutes early.  First visit includes exam, cleaning, and X-rays when needed."
     },
     {
-      "id": "07ca381f-0a78-47eb-a623-7e65fbb11bd3",
+      "id": "325fb572-6187-4342-af03-04da0a21c4e4",
       "sourceId": "services.md",
       "title": "services",
       "sourcePath": "services.md",
       "text": "# Bright Smile Dental — Services (Sample Data)\n\nBright Smile Dental Clinic offers general and cosmetic dentistry for families in the fictional town of Maple Grove."
     },
     {
-      "id": "3d7f7506-99c0-4b64-aaf3-626fa8217497",
+      "id": "0c706345-718a-4bcf-a427-cd6221b0910c",
       "sourceId": "services.md",
       "title": "services",
       "heading": "Preventive care",
@@ -127,7 +127,7 @@
       "text": "## Preventive care\n\n- **New patient exam and cleaning** — $129 (sample price). Includes X-rays for most adults.\n- **Routine cleaning (every 6 months)** — $89 for established patients.\n- **Fluoride treatment (children)** — $35."
     },
     {
-      "id": "5d0f8424-548d-4e8d-927d-c31540dde512",
+      "id": "f5695dd4-cc25-4d02-9a59-6ad80085fb8b",
       "sourceId": "services.md",
       "title": "services",
       "heading": "Restorative",
@@ -135,7 +135,7 @@
       "text": "## Restorative\n\n- **Composite filling (1 surface)** — from $165.\n- **Crown (porcelain)** — from $980; we provide a written estimate after exam."
     },
     {
-      "id": "3325b7a0-145d-4a84-843f-1b8a5af49ef1",
+      "id": "7005268c-4af4-415b-b726-fd1d5a5a0198",
       "sourceId": "services.md",
       "title": "services",
       "heading": "Cosmetic",
@@ -143,7 +143,7 @@
       "text": "## Cosmetic\n\n- **Professional whitening (in-office)** — $450 per session.\n- **Take-home whitening kit** — $199."
     },
     {
-      "id": "a63936e9-0c1c-4fbb-950d-6721b4d48dbe",
+      "id": "d5c3385d-ca12-42a0-b085-1ddf5d8d8de7",
       "sourceId": "services.md",
       "title": "services",
       "heading": "Emergency",
@@ -151,7 +151,7 @@
       "text": "## Emergency\n\nWe reserve same-day slots for **tooth pain, swelling, or broken teeth**. Call **(555) 014-7721** before 2:00 PM Mon–Fri for same-day availability."
     },
     {
-      "id": "0458e79c-4f53-4efb-900f-d9b9a92b2c4a",
+      "id": "c4255db1-1517-4c3f-9ce8-3db3c3cfb3a8",
       "sourceId": "services.md",
       "title": "services",
       "heading": "What we do not offer",
@@ -159,7 +159,7 @@
       "text": "## What we do not offer\n\nWe do **not** provide orthodontic braces, oral surgery, or sleep-apnea appliances. We refer those cases to partner specialists."
     },
     {
-      "id": "744937e9-3d63-4ef3-9cb2-a2522b081998",
+      "id": "e00dfec2-70b5-439c-adf3-d3ff833b234b",
       "sourceId": "welcome.txt",
       "title": "welcome",
       "sourcePath": "welcome.txt",

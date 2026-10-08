@@ -20,6 +20,27 @@ function headingMatches(chunk: DocumentChunk, pattern: RegExp): boolean {
   return pattern.test(h);
 }
 
+/** True when the top chunk's heading/path aligns with detected query intent. */
+export function chunkAlignsWithQueryIntent(chunk: DocumentChunk, query: string): boolean {
+  const intents = detectIntents(query);
+  if (intents.size === 0) return false;
+
+  if (intents.has("hours") && headingMatches(chunk, /office hours|hours/)) return true;
+  if (intents.has("insurance") && headingMatches(chunk, /insurance|billing|payment without/)) return true;
+  if (intents.has("price") && /\$|\bfrom \$/i.test(chunk.text) && /services/i.test(chunk.sourcePath)) {
+    return true;
+  }
+  if (intents.has("booking") && headingMatches(chunk, /book|appointment/)) return true;
+  if (intents.has("location") && headingMatches(chunk, /parking|location|hours/)) return true;
+  if (intents.has("emergency") && headingMatches(chunk, /emergency/)) return true;
+  if (intents.has("kids") && headingMatches(chunk, /children|child/)) return true;
+  if (/\bcancel/i.test(query) && headingMatches(chunk, /cancellation/)) return true;
+  if (/\bpayment plan|financing|careplan/i.test(query) && /careplan|financing/i.test(chunkHaystack(chunk))) {
+    return true;
+  }
+  return false;
+}
+
 /** Intent-aware adjustments on top of MiniSearch score. */
 export function intentRerankBonus(chunk: DocumentChunk, query: string, intents: Set<SearchIntent>): number {
   let bonus = 0;

@@ -60,6 +60,54 @@ export interface ExpandedQuery {
 }
 
 /** Expand query with synonyms and intent terms for multi-pass search. */
+/** All tokens from the raw query plus synonym/intent expansion passes. */
+export function collectExpandedTokens(query: string): string[] {
+  const terms = new Set<string>();
+  for (const { text } of expandQueries(query)) {
+    for (const t of tokenize(text)) terms.add(t);
+  }
+  return [...terms];
+}
+
+/** Terms equivalent to `token` via SYNONYM_GROUPS (includes the token itself). */
+export function relatedTermsForToken(token: string): Set<string> {
+  const set = new Set<string>([token]);
+  const normalized = token.replace(/-/g, "");
+  for (const group of SYNONYM_GROUPS) {
+    if (group.some((g) => g === token || g.replace(/-/g, "") === normalized)) {
+      for (const g of group) {
+        set.add(g);
+        set.add(g.replace(/-/g, ""));
+      }
+    }
+  }
+  return set;
+}
+
+export function tokenMatchesDocument(
+  token: string,
+  docTokens: Set<string>,
+  haystackLower: string
+): boolean {
+  if (docTokens.has(token) || haystackLower.includes(token)) return true;
+  for (const rel of relatedTermsForToken(token)) {
+    if (docTokens.has(rel) || haystackLower.includes(rel)) return true;
+  }
+  return false;
+}
+
+export function countMatchingQueryTokens(
+  tokens: string[],
+  docTokens: Set<string>,
+  haystackLower: string
+): number {
+  let n = 0;
+  for (const t of tokens) {
+    if (tokenMatchesDocument(t, docTokens, haystackLower)) n += 1;
+  }
+  return n;
+}
+
 export function expandQueries(query: string): ExpandedQuery[] {
   const trimmed = query.trim();
   const queries: ExpandedQuery[] = [{ text: trimmed, weight: 1 }];

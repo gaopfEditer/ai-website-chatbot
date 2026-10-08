@@ -2,8 +2,14 @@ import fs from "fs";
 import MiniSearch from "minisearch";
 import type { DocumentChunk, IndexedStore, RetrievalHit } from "../types";
 import { indexPath } from "../paths";
-import { expandQueries, tokenize } from "./query-processing";
-import { combinedScore } from "./rerank";
+import {
+  collectExpandedTokens,
+  countMatchingQueryTokens,
+  expandQueries,
+  tokenize,
+  tokenMatchesDocument,
+} from "./query-processing";
+import { chunkAlignsWithQueryIntent, combinedScore } from "./rerank";
 import { isStopword } from "./stopwords";
 
 function buildMiniSearch(chunks: DocumentChunk[]): MiniSearch<DocumentChunk> {
@@ -80,23 +86,44 @@ export function searchChunks(
   return hits.slice(0, limit);
 }
 
-/** Score threshold plus lexical overlap — reduces fuzzy false positives offline. */
+/** Score threshold plus lexical overlap (with synonyms + expansion) — reduces fuzzy false positives offline. */
 export function isLowConfidence(hits: RetrievalHit[], threshold: number, query?: string): boolean {
   if (hits.length === 0) return true;
-  if (hits[0].score < threshold) return true;
+  const top = hits[0];
+  if (top.score < threshold) return true;
   if (!query) return false;
+
+  const haystackLower = `${top.chunk.text} ${top.chunk.title} ${top.chunk.heading ?? ""}`.toLowerCase();
+  const docTokens = new Set(tokenize(haystackLower));
 
   const qTokens = tokenize(query);
   if (qTokens.length === 0) return true;
-  const docTokens = new Set(
-    tokenize(
-      `${hits[0].chunk.text} ${hits[0].chunk.title} ${hits[0].chunk.heading ?? ""}`
-    )
+
+  const expandedTokens = collectExpandedTokens(query);
+  const rawMatches = countMatchingQueryTokens(qTokens, docTokens, haystackLower);
+  const expandedMatches = countMatchingQueryTokens(expandedTokens, docTokens, haystackLower);
+  const rawRatio = rawMatches / qTokens.length;
+  const expandedRatio = expandedTokens.length ? expandedMatches / expandedTokens.length : 0;
+
+  const unmatched = qTokens.filter(
+    (t) => !tokenMatchesDocument(t, docTokens, haystackLower)
   );
-  let overlap = 0;
-  for (const t of qTokens) {
-    if (docTokens.has(t)) overlap += 1;
+
+  const margin =
+    hits.length > 1 ? (top.score - hits[1].score) / Math.max(top.score, 1) : 1;
+  const intentAligned = chunkAlignsWithQueryIntent(top.chunk, query);
+
+  if (unmatched.length >= 2 && rawMatches < 2) return true;
+
+  if (margin >= 0.4 && intentAligned && rawMatches >= 1 && unmatched.length <= 1) {
+    return false;
   }
-  const ratio = overlap / qTokens.length;
-  return overlap < 2 || ratio < 0.35;
+
+  if (rawMatches >= 2 && rawRatio >= 0.35) return false;
+
+  if (expandedMatches >= 2 && expandedRatio >= 0.25 && rawMatches >= 1 && unmatched.length <= 1) {
+    return false;
+  }
+
+  return rawMatches < 2 || rawRatio < 0.35;
 }
