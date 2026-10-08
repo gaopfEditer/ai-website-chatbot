@@ -35,7 +35,7 @@ export async function handleUserMessage(params: {
   }
 
   if (low) {
-    const offline = buildOfflineAnswer(hits, true);
+    const offline = buildOfflineAnswer(hits, true, params.message);
     return {
       reply: offline.message,
       kind: "unknown",
@@ -71,7 +71,7 @@ export async function handleUserMessage(params: {
     }
   }
 
-  const offline = buildOfflineAnswer(hits, false);
+  const offline = buildOfflineAnswer(hits, false, params.message);
   return {
     reply: offline.message,
     kind: offline.kind,

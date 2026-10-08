@@ -1,132 +1,169 @@
 {
   "botId": "bright-smile-demo",
-  "updatedAt": "2026-10-08T03:27:22.421Z",
+  "updatedAt": "2026-10-08T03:45:17.399Z",
   "chunks": [
     {
-      "id": "7fd73f3c-1257-49bf-b5b9-8d8c54a19a47",
+      "id": "5e958e7f-54cd-40d0-9f37-ef1fa73d149b",
       "sourceId": "faq.html",
       "title": "faq",
+      "heading": "How do I book an appointment?",
       "sourcePath": "faq.html",
-      "text": "Frequently asked questions Sample data for demo only. Call (555) 014-7721 or use our online form at brightsmile-demo.example/book (demo link only). Younger children may be referred to a pediatric specialist. Mild sensitivity is common for 24–48 hours after in-office whitening. Implant placement is referred to Maple Grove Oral Surgery (partner)."
+      "text": "How do I book an appointment?\n\nCall (555) 014-7721 or use our online form at brightsmile-demo.example/book (demo link only)."
     },
     {
-      "id": "48541614-f964-48ae-b273-3e86b7097296",
+      "id": "e3246eb0-ee11-4c26-bd25-490daf165578",
+      "sourceId": "faq.html",
+      "title": "faq",
+      "heading": "Do you see children?",
+      "sourcePath": "faq.html",
+      "text": "Do you see children?\n\nYes. We welcome patients age 3 and older. Younger children may be referred to a pediatric specialist."
+    },
+    {
+      "id": "a7844fc2-1ad1-4a6e-979f-c640b62fa1ce",
+      "sourceId": "faq.html",
+      "title": "faq",
+      "heading": "Is whitening safe for sensitive teeth?",
+      "sourcePath": "faq.html",
+      "text": "Is whitening safe for sensitive teeth?\n\nWe assess sensitivity during a consult. Mild sensitivity is common for 24–48 hours after in-office whitening."
+    },
+    {
+      "id": "2b3e9d38-86ea-40bf-b3d0-9da7d98664d9",
+      "sourceId": "faq.html",
+      "title": "faq",
+      "heading": "Do you offer dental implants?",
+      "sourcePath": "faq.html",
+      "text": "Do you offer dental implants?\n\nNo. Implant placement is referred to Maple Grove Oral Surgery (partner)."
+    },
+    {
+      "id": "0032249a-2e28-4cfe-913b-6b92496ae3a4",
       "sourceId": "hours-and-location.md",
       "title": "hours-and-location",
       "sourcePath": "hours-and-location.md",
-      "text": "# Hours & Location (Sample Data) **Bright Smile Dental Clinic** 412 Oakview Lane, Suite 200 Maple Grove, ST 00000 **Phone:** (555) 014-7721 **Email:** frontdesk@brightsmile-demo.example"
+      "text": "# Hours & Location (Sample Data)\n\n**Bright Smile Dental Clinic**  \n412 Oakview Lane, Suite 200  \nMaple Grove, ST 00000  \n\n**Phone:** (555) 014-7721  \n**Email:** frontdesk@brightsmile-demo.example"
     },
     {
-      "id": "32e64571-7fe2-4e3a-a04c-2e1871cfda45",
+      "id": "ab5fbc04-1a9a-44a0-ac61-68372b54d9fe",
       "sourceId": "hours-and-location.md",
       "title": "hours-and-location",
+      "heading": "Office hours",
       "sourcePath": "hours-and-location.md",
-      "text": "## Office hours | Day | Hours | |-----|-------| | Monday | 8:00 AM – 5:00 PM | | Tuesday | 8:00 AM – 6:00 PM | | Wednesday | 8:00 AM – 5:00 PM | | Thursday | 8:00 AM – 7:00 PM | | Friday | 8:00 AM – 3:00 PM | | Saturday | 9:00 AM – 1:00 PM (2nd & 4th Sat only) | | Sunday | Closed |"
+      "text": "## Office hours\n\n| Day | Hours |\n|-----|-------|\n| Monday | 8:00 AM – 5:00 PM |\n| Tuesday | 8:00 AM – 6:00 PM |\n| Wednesday | 8:00 AM – 5:00 PM |\n| Thursday | 8:00 AM – 7:00 PM |\n| Friday | 8:00 AM – 3:00 PM |\n| Saturday | 9:00 AM – 1:00 PM (2nd & 4th Sat only) |\n| Sunday | Closed |"
     },
     {
-      "id": "775e97a5-6722-42ff-b105-47399e67c076",
+      "id": "33491460-c3ef-4960-8c8f-ad1423ab0ed9",
       "sourceId": "hours-and-location.md",
       "title": "hours-and-location",
+      "heading": "Parking",
       "sourcePath": "hours-and-location.md",
-      "text": "## Parking Free parking in the Oakview Medical Plaza garage."
+      "text": "## Parking\n\nFree parking in the Oakview Medical Plaza garage. Enter from Birch Street."
     },
     {
-      "id": "6564759c-1f24-41f9-8457-91a057dce551",
+      "id": "4a7d3762-541e-493c-8890-44be6b29b8d2",
       "sourceId": "hours-and-location.md",
       "title": "hours-and-location",
+      "heading": "Holidays (closed)",
       "sourcePath": "hours-and-location.md",
-      "text": "## Holidays (closed) We are closed on New Year's Day, Independence Day, Thanksgiving, and Christmas Day."
+      "text": "## Holidays (closed)\n\nWe are closed on New Year's Day, Independence Day, Thanksgiving, and Christmas Day."
     },
     {
-      "id": "f8aaff85-0909-472a-941b-a4b0741d8b49",
+      "id": "53f9bcc4-a51f-4b62-a51c-01175c4b187b",
       "sourceId": "insurance-faq.md",
       "title": "insurance-faq",
       "sourcePath": "insurance-faq.md",
       "text": "# Insurance & Billing FAQ (Sample Data)"
     },
     {
-      "id": "532c0a53-6316-44eb-874e-ae9689ab268d",
+      "id": "4e61665e-9ce9-432f-8f4f-a6d56ccf4c17",
       "sourceId": "insurance-faq.md",
       "title": "insurance-faq",
+      "heading": "Do you accept insurance?",
       "sourcePath": "insurance-faq.md",
-      "text": "We are **in-network** with these fictional plans for demo purposes: - Maple Health PPO - River Valley Dental HMO - Summit Care Open Access Bring your member ID to your visit."
+      "text": "## Do you accept insurance?\n\nWe are **in-network** with these fictional plans for demo purposes:\n\n- Maple Health PPO\n- River Valley Dental HMO\n- Summit Care Open Access\n\nBring your member ID to your visit. We file claims on your behalf."
     },
     {
-      "id": "93a86ce2-b785-40e4-a35c-3337554ae77a",
+      "id": "6b9ab07f-43ee-4364-bc3c-9565a1938856",
       "sourceId": "insurance-faq.md",
       "title": "insurance-faq",
+      "heading": "Payment without insurance",
       "sourcePath": "insurance-faq.md",
-      "text": "## Payment without insurance We accept cash, credit cards, and CarePlan financing (subject to approval). Payment is due at time of service unless a prior arrangement is documented."
+      "text": "## Payment without insurance\n\nWe accept cash, credit cards, and CarePlan financing (subject to approval). Payment is due at time of service unless a prior arrangement is documented."
     },
     {
-      "id": "fb77543f-73e2-4eb6-923a-21b440636620",
+      "id": "3578606b-2cfb-480c-aaec-6c696aa1ffc8",
       "sourceId": "insurance-faq.md",
       "title": "insurance-faq",
+      "heading": "Cancellation policy",
       "sourcePath": "insurance-faq.md",
-      "text": "## Cancellation policy Please cancel or reschedule at least **24 hours** in advance. Late cancellations may incur a **$50** fee."
+      "text": "## Cancellation policy\n\nPlease cancel or reschedule at least **24 hours** in advance. Late cancellations may incur a **$50** fee."
     },
     {
-      "id": "124f8532-7e7b-4a06-a345-100fa22b420a",
+      "id": "ab96be29-67db-48bf-869d-c456f574e228",
       "sourceId": "insurance-faq.md",
       "title": "insurance-faq",
+      "heading": "Records requests",
       "sourcePath": "insurance-faq.md",
-      "text": "## Records requests Email **records@brightsmile-demo.example** with your name and date of birth."
+      "text": "## Records requests\n\nEmail **records@brightsmile-demo.example** with your name and date of birth. Allow 3 business days for copies."
     },
     {
-      "id": "9beb649f-0f72-495d-a9ca-3bace9830212",
+      "id": "459f8736-ca71-4c00-b7ce-97e9e2bc40d8",
       "sourceId": "new-patient-guide.pdf",
       "title": "new-patient-guide",
       "sourcePath": "new-patient-guide.pdf",
-      "text": "New Patient Guide (Sample Data) Bring insurance card and arrive 15 minutes early. First visit includes exam, cleaning, and X-rays when needed."
+      "text": "New Patient Guide (Sample Data)  Bring insurance card and arrive 15 minutes early.  First visit includes exam, cleaning, and X-rays when needed."
     },
     {
-      "id": "35122eaa-d7da-40e4-95c2-fcd48186ee8d",
+      "id": "07ca381f-0a78-47eb-a623-7e65fbb11bd3",
       "sourceId": "services.md",
       "title": "services",
       "sourcePath": "services.md",
-      "text": "# Bright Smile Dental — Services (Sample Data) Bright Smile Dental Clinic offers general and cosmetic dentistry for families in the fictional town of Maple Grove."
+      "text": "# Bright Smile Dental — Services (Sample Data)\n\nBright Smile Dental Clinic offers general and cosmetic dentistry for families in the fictional town of Maple Grove."
     },
     {
-      "id": "44b0355e-5d6e-4009-8819-09f1f7dda0da",
+      "id": "3d7f7506-99c0-4b64-aaf3-626fa8217497",
       "sourceId": "services.md",
       "title": "services",
+      "heading": "Preventive care",
       "sourcePath": "services.md",
-      "text": "## Preventive care - **New patient exam and cleaning** — $129 (sample price). - **Routine cleaning (every 6 months)** — $89 for established patients. - **Fluoride treatment (children)** — $35."
+      "text": "## Preventive care\n\n- **New patient exam and cleaning** — $129 (sample price). Includes X-rays for most adults.\n- **Routine cleaning (every 6 months)** — $89 for established patients.\n- **Fluoride treatment (children)** — $35."
     },
     {
-      "id": "f84cc92f-c201-4cc1-8e02-d9f06af1ed1c",
+      "id": "5d0f8424-548d-4e8d-927d-c31540dde512",
       "sourceId": "services.md",
       "title": "services",
+      "heading": "Restorative",
       "sourcePath": "services.md",
-      "text": "## Restorative - **Composite filling (1 surface)** — from $165. - **Crown (porcelain)** — from $980; we provide a written estimate after exam."
+      "text": "## Restorative\n\n- **Composite filling (1 surface)** — from $165.\n- **Crown (porcelain)** — from $980; we provide a written estimate after exam."
     },
     {
-      "id": "c26cc57d-ef47-4fca-91ad-39dbcc4d1706",
+      "id": "3325b7a0-145d-4a84-843f-1b8a5af49ef1",
       "sourceId": "services.md",
       "title": "services",
+      "heading": "Cosmetic",
       "sourcePath": "services.md",
-      "text": "## Cosmetic - **Professional whitening (in-office)** — $450 per session."
+      "text": "## Cosmetic\n\n- **Professional whitening (in-office)** — $450 per session.\n- **Take-home whitening kit** — $199."
     },
     {
-      "id": "91e783ec-f750-44f4-8ce5-b6c6e4b815aa",
+      "id": "a63936e9-0c1c-4fbb-950d-6721b4d48dbe",
       "sourceId": "services.md",
       "title": "services",
+      "heading": "Emergency",
       "sourcePath": "services.md",
-      "text": "## Emergency We reserve same-day slots for **tooth pain, swelling, or broken teeth**. Call **(555) 014-7721** before 2:00 PM Mon–Fri for same-day availability."
+      "text": "## Emergency\n\nWe reserve same-day slots for **tooth pain, swelling, or broken teeth**. Call **(555) 014-7721** before 2:00 PM Mon–Fri for same-day availability."
     },
     {
-      "id": "e55fe5bf-319f-41c4-82a1-f5b22216fa2f",
+      "id": "0458e79c-4f53-4efb-900f-d9b9a92b2c4a",
       "sourceId": "services.md",
       "title": "services",
+      "heading": "What we do not offer",
       "sourcePath": "services.md",
-      "text": "## What we do not offer We do **not** provide orthodontic braces, oral surgery, or sleep-apnea appliances. We refer those cases to partner specialists."
+      "text": "## What we do not offer\n\nWe do **not** provide orthodontic braces, oral surgery, or sleep-apnea appliances. We refer those cases to partner specialists."
     },
     {
-      "id": "fc19e6f8-75b6-43eb-a9b4-3af715e53e1a",
+      "id": "744937e9-3d63-4ef3-9cb2-a2522b081998",
       "sourceId": "welcome.txt",
       "title": "welcome",
       "sourcePath": "welcome.txt",
-      "text": "Bright Smile Dental Clinic — Welcome (Sample Data) Our mission is comfortable, transparent dental care for Maple Grove families. New patients: arrive 15 minutes early with photo ID and insurance card. Forms are also available on our demo website."
+      "text": "Bright Smile Dental Clinic — Welcome (Sample Data)\n\nOur mission is comfortable, transparent dental care for Maple Grove families.\n\nNew patients: arrive 15 minutes early with photo ID and insurance card. Forms are also available on our demo website.\n\nTeam lead dentist (fictional): Dr. Elena Park, DDS."
     }
   ]
 }

@@ -2,6 +2,8 @@ export interface DocumentChunk {
   id: string;
   sourceId: string;
   title: string;
+  /** Section heading when the chunk is one logical doc section (e.g. markdown ##). */
+  heading?: string;
   sourcePath: string;
   text: string;
 }
