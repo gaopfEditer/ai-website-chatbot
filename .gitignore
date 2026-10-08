@@ -1,0 +1,11 @@
+node_modules
+.next
+.env
+.env.local
+data/leads.db
+data/leads.csv
+data/conversations.db-journal
+*.log
+test-results
+playwright-report
+data/index/test-*.json
