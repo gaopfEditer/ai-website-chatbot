@@ -51,16 +51,26 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Origin not allowed" }, { status: 403, headers });
   }
 
-  const conv = getOrCreateConversation(body.conversationId, body.botId);
-  appendMessage(body.conversationId, { role: "user", content: body.message });
+  let conv;
+  try {
+    conv = getOrCreateConversation(body.conversationId, body.botId);
+    appendMessage(body.conversationId, { role: "user", content: body.message });
+  } catch (e) {
+    console.warn("Conversation store unavailable:", e);
+    conv = { id: body.conversationId, botId: body.botId, messages: [] as { role: string; content: string }[] };
+  }
 
   const payload = await handleUserMessage({
     botId: body.botId,
     message: body.message,
-    history: conv.messages,
+    history: conv.messages as { role: "user" | "assistant" | "system"; content: string }[],
   });
 
-  appendMessage(body.conversationId, { role: "assistant", content: payload.reply });
+  try {
+    appendMessage(body.conversationId, { role: "assistant", content: payload.reply });
+  } catch (e) {
+    console.warn("Could not persist assistant message:", e);
+  }
 
   return NextResponse.json(
     {

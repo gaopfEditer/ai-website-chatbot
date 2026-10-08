@@ -21,7 +21,7 @@ Small businesses get the same repetitive questions on their website: hours, pric
 | **Leads** | Name, email, need; email validation; **SQLite + CSV** by default |
 | **Integrations** | Pluggable **Google Sheets** and **HubSpot** adapters (disabled by default) |
 | **Embed** | One script tag adds a chat bubble |
-| **Admin** | Conversations, leads, re-index, edit greeting & handoff email |
+| **Admin** | Conversations, leads, re-index, edit greeting & handoff email (HTTP Basic when `ADMIN_PASSWORD` is set) |
 | **Safety** | Rate limits, injection-resistant LLM system prompt, no secrets in widget, CORS allowlist |
 
 ## Screenshots
@@ -54,6 +54,15 @@ npm run demo
 - Admin: [http://localhost:3000/admin](http://localhost:3000/admin)
 
 `npm run demo` builds the retrieval index and starts Next.js. **No API keys required.**
+
+### Admin access
+
+| `ADMIN_PASSWORD` | Behavior |
+|------------------|----------|
+| **Unset** (default for public demo) | `/admin` is **read-only demo mode**: sample leads/conversations only, no settings or re-index writes |
+| **Set** | `/admin` and `/api/admin/*` require **HTTP Basic** auth (any username, password = `ADMIN_PASSWORD`); real leads and writes enabled |
+
+Do not expose a password-protected admin on the public internet without TLS (Vercel provides HTTPS).
 
 ### Tests
 
@@ -104,11 +113,16 @@ Answers still use retrieved passages in the prompt; the system instructions forb
 ## Deploy to Vercel (free tier)
 
 1. Import this repository in Vercel (Next.js detected; `vercel.json` included).
-2. Set `ALLOWED_ORIGINS` to your customer sites (comma-separated URLs).
-3. Optional: LLM and lead sink env vars from `.env.example`.
-4. Deploy. Use `https://<project>.vercel.app/widget.js` in the embed snippet.
+2. Leave **`ADMIN_PASSWORD` unset** for the portfolio demo (read-only admin with sample data).
+3. Set `ALLOWED_ORIGINS` to your customer sites (comma-separated URLs). Vercel preview/production URLs are added automatically.
+4. Optional: LLM and lead sink env vars from `.env.example`.
+5. Deploy. Use `https://<project>.vercel.app/widget.js` in the embed snippet.
 
-**Note:** Serverless filesystem is ephemeral; leads persist for the lifetime of the deployment’s writable storage. For production, point lead sinks at Sheets/HubSpot or swap SQLite for a hosted database.
+**Vercel notes:**
+
+- **Retrieval index:** `npm run build` runs ingest and commits/updates `data/index/` — search works on serverless without runtime writes.
+- **Leads:** On Vercel, lead capture still returns success to the widget but uses **in-memory storage** (not durable). The API may include a `persistenceNote` explaining this. For production, enable Sheets/HubSpot sinks or a hosted database.
+- **Re-index:** Disabled at runtime on Vercel (read-only filesystem); rebuild/redeploy to refresh documents.
 
 ## Project layout
 

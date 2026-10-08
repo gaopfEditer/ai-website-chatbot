@@ -20,6 +20,23 @@ describe("lead validation and storage", () => {
     expect(result.success).toBe(false);
   });
 
+  it("persists valid leads in memory when VERCEL=1", async () => {
+    process.env.VERCEL = "1";
+    resetStoreForTests();
+    const convId = uuidv4();
+    await saveLead({
+      botId: "bright-smile-demo",
+      conversationId: convId,
+      name: "Casey Kim",
+      email: "casey@example.com",
+      need: "New patient exam",
+      reason: "buying_intent",
+    });
+    expect(listLeads("bright-smile-demo")).toHaveLength(1);
+    delete process.env.VERCEL;
+    resetStoreForTests();
+  });
+
   it("persists valid leads to sqlite and csv", async () => {
     const convId = uuidv4();
     const lead = await saveLead({

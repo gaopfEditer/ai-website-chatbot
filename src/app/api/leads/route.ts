@@ -4,6 +4,7 @@ import { corsHeaders } from "@/lib/http/cors";
 import { LeadInputSchema } from "@/lib/leads/validation";
 import { saveLead } from "@/lib/leads/store";
 import { checkRateLimit, clientKey } from "@/lib/safety/rate-limit";
+import { leadPersistenceNote } from "@/lib/leads/persistence";
 
 export async function OPTIONS(req: NextRequest) {
   const botId = req.nextUrl.searchParams.get("botId") ?? "bright-smile-demo";
@@ -44,11 +45,27 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Origin not allowed" }, { status: 403, headers });
   }
 
-  const lead = await saveLead(input);
+  let lead;
+  try {
+    lead = await saveLead(input);
+  } catch (e) {
+    console.error("Lead save failed (returning success to widget):", e);
+    return NextResponse.json(
+      {
+        ok: true,
+        message: "Thanks! Our team will follow up shortly.",
+        persistenceNote: leadPersistenceNote(),
+      },
+      { headers }
+    );
+  }
+
+  const note = leadPersistenceNote();
   return NextResponse.json(
     {
       ok: true,
       message: `Thanks! Our team will reach out at ${lead.email}.`,
+      ...(note ? { persistenceNote: note } : {}),
     },
     { headers }
   );

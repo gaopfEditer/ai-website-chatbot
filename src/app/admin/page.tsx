@@ -5,6 +5,9 @@ import Link from "next/link";
 
 const BOT_ID = "bright-smile-demo";
 
+const adminFetch = (input: RequestInfo | URL, init?: RequestInit) =>
+  fetch(input, { ...init, credentials: "same-origin" });
+
 type Lead = {
   id: string;
   name: string;
@@ -27,15 +30,19 @@ export default function AdminPage() {
   const [greeting, setGreeting] = useState("");
   const [handoffEmail, setHandoffEmail] = useState("");
   const [status, setStatus] = useState("");
+  const [readOnly, setReadOnly] = useState(true);
+  const [demoMode, setDemoMode] = useState(true);
 
   const refresh = useCallback(async () => {
     const [l, c, cfg] = await Promise.all([
-      fetch(`/api/admin/leads?botId=${BOT_ID}`).then((r) => r.json()),
-      fetch(`/api/admin/conversations?botId=${BOT_ID}`).then((r) => r.json()),
-      fetch(`/api/admin/config?botId=${BOT_ID}`).then((r) => r.json()),
+      adminFetch(`/api/admin/leads?botId=${BOT_ID}`).then((r) => r.json()),
+      adminFetch(`/api/admin/conversations?botId=${BOT_ID}`).then((r) => r.json()),
+      adminFetch(`/api/admin/config?botId=${BOT_ID}`).then((r) => r.json()),
     ]);
     setLeads(l.leads ?? []);
     setConversations(c.conversations ?? []);
+    setReadOnly(Boolean(l.readOnly ?? cfg.readOnly));
+    setDemoMode(Boolean(l.demoMode ?? cfg.demoMode));
     if (cfg.config) {
       setGreeting(cfg.config.greeting);
       setHandoffEmail(cfg.config.handoffEmail);
@@ -48,22 +55,39 @@ export default function AdminPage() {
 
   async function saveConfig(e: React.FormEvent) {
     e.preventDefault();
-    await fetch("/api/admin/config", {
+    if (readOnly) {
+      setStatus("Demo mode: settings are read-only.");
+      return;
+    }
+    const res = await adminFetch("/api/admin/config", {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ botId: BOT_ID, greeting, handoffEmail }),
     });
+    if (!res.ok) {
+      setStatus("Could not save settings.");
+      return;
+    }
     setStatus("Settings saved.");
   }
 
   async function reindex() {
+    if (readOnly) {
+      setStatus("Demo mode: re-index is disabled.");
+      return;
+    }
     setStatus("Re-indexing…");
-    const res = await fetch("/api/admin/reindex", {
+    const res = await adminFetch("/api/admin/reindex", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ botId: BOT_ID }),
-    }).then((r) => r.json());
-    setStatus(`Index updated: ${res.chunkCount} chunks.`);
+    });
+    const body = await res.json();
+    if (!res.ok) {
+      setStatus(body.error ?? "Re-index failed.");
+      return;
+    }
+    setStatus(`Index updated: ${body.chunkCount} chunks.`);
     await refresh();
   }
 
@@ -73,29 +97,52 @@ export default function AdminPage() {
         <Link href="/">← Home</Link> · <Link href="/demo">Demo site</Link>
       </p>
       <h1>Admin — {BOT_ID}</h1>
-      <p>Demo admin UI (no auth in this portfolio build). Do not expose publicly without protection.</p>
+      {demoMode ? (
+        <p className="card" style={{ background: "#fff8e6", borderColor: "#f0d78c" }}>
+          <strong>Public demo mode.</strong> Sample leads and conversations are shown only — live
+          submissions are never listed here. Set <code>ADMIN_PASSWORD</code> in the environment to
+          enable HTTP Basic auth and the full admin (real leads, settings, re-index on local/VPS
+          hosts).
+        </p>
+      ) : (
+        <p>Protected admin — HTTP Basic auth (any username, password = <code>ADMIN_PASSWORD</code>).</p>
+      )}
       {status && <p>{status}</p>}
 
       <div className="card">
         <h2>Bot settings</h2>
         <form onSubmit={saveConfig}>
           <label htmlFor="greeting">Greeting</label>
-          <textarea id="greeting" rows={3} value={greeting} onChange={(e) => setGreeting(e.target.value)} />
+          <textarea
+            id="greeting"
+            rows={3}
+            value={greeting}
+            onChange={(e) => setGreeting(e.target.value)}
+            readOnly={readOnly}
+          />
           <label htmlFor="email">Handoff email</label>
-          <input id="email" type="email" value={handoffEmail} onChange={(e) => setHandoffEmail(e.target.value)} />
-          <button className="btn" type="submit">
+          <input
+            id="email"
+            type="email"
+            value={handoffEmail}
+            onChange={(e) => setHandoffEmail(e.target.value)}
+            readOnly={readOnly}
+          />
+          <button className="btn" type="submit" disabled={readOnly}>
             Save
           </button>
         </form>
         <p style={{ marginTop: "1rem" }}>
-          <button className="btn secondary" type="button" onClick={reindex}>
+          <button className="btn secondary" type="button" onClick={reindex} disabled={readOnly}>
             Re-index documents
           </button>
         </p>
       </div>
 
       <div className="card">
-        <h2>Leads ({leads.length})</h2>
+        <h2>
+          Leads ({leads.length}){demoMode ? " — sample data" : ""}
+        </h2>
         {leads.length === 0 ? (
           <p>No leads yet.</p>
         ) : (
@@ -125,7 +172,7 @@ export default function AdminPage() {
       </div>
 
       <div className="card">
-        <h2>Recent conversations</h2>
+        <h2>Recent conversations{demoMode ? " (sample)" : ""}</h2>
         {conversations.slice(0, 10).map((conv) => (
           <details key={conv.id} style={{ marginBottom: "0.75rem" }}>
             <summary>

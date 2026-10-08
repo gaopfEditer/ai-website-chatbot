@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { loadBotConfig, saveBotConfig } from "@/lib/bot-config";
+import { isAdminDemoMode, requireAdminAuth, requireAdminWrite } from "@/lib/admin/auth";
 import { z } from "zod";
 
 const UpdateSchema = z.object({
@@ -9,19 +10,29 @@ const UpdateSchema = z.object({
 });
 
 export async function GET(req: NextRequest) {
+  const denied = requireAdminAuth(req.headers.get("authorization"));
+  if (denied) return denied;
+
   const botId = req.nextUrl.searchParams.get("botId") ?? "bright-smile-demo";
   try {
-    return NextResponse.json({ config: loadBotConfig(botId) });
+    return NextResponse.json({
+      config: loadBotConfig(botId),
+      demoMode: isAdminDemoMode(),
+      readOnly: isAdminDemoMode(),
+    });
   } catch {
     return NextResponse.json({ error: "Unknown bot" }, { status: 404 });
   }
 }
 
 export async function PUT(req: NextRequest) {
+  const denied = requireAdminWrite(req.headers.get("authorization"));
+  if (denied) return denied;
+
   const body = UpdateSchema.parse(await req.json());
   const config = loadBotConfig(body.botId);
   config.greeting = body.greeting;
   config.handoffEmail = body.handoffEmail;
   saveBotConfig(config);
-  return NextResponse.json({ config });
+  return NextResponse.json({ config, demoMode: false, readOnly: false });
 }

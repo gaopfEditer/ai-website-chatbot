@@ -6,13 +6,24 @@ import type { LeadInput } from "./validation";
 import { dataPath } from "../paths";
 import { createGoogleSheetsAdapter } from "./adapters/google-sheets";
 import { createHubSpotAdapter } from "./adapters/hubspot";
+import { useInMemoryLeadStore } from "./persistence";
 
 const DB_FILE = dataPath("leads.db");
 const CSV_FILE = dataPath("leads.csv");
 
 let db: Database.Database | null = null;
 
+const memoryLeads: LeadRecord[] = [];
+const memoryConversations = new Map<string, ConversationRecord>();
+
+function usingMemory(): boolean {
+  return useInMemoryLeadStore();
+}
+
 function getDb(): Database.Database {
+  if (usingMemory()) {
+    throw new Error("SQLite disabled in ephemeral deployment");
+  }
   if (!db) {
     fs.mkdirSync(dataPath(), { recursive: true });
     db = new Database(DB_FILE);
@@ -41,19 +52,24 @@ function getDb(): Database.Database {
 }
 
 function appendCsv(lead: LeadRecord): void {
-  const header = "id,bot_id,conversation_id,name,email,need,reason,created_at\n";
-  const row = [
-    lead.id,
-    lead.botId,
-    lead.conversationId,
-    `"${lead.name.replace(/"/g, '""')}"`,
-    lead.email,
-    `"${lead.need.replace(/"/g, '""')}"`,
-    lead.reason,
-    lead.createdAt,
-  ].join(",");
-  if (!fs.existsSync(CSV_FILE)) fs.writeFileSync(CSV_FILE, header);
-  fs.appendFileSync(CSV_FILE, row + "\n");
+  if (usingMemory()) return;
+  try {
+    const header = "id,bot_id,conversation_id,name,email,need,reason,created_at\n";
+    const row = [
+      lead.id,
+      lead.botId,
+      lead.conversationId,
+      `"${lead.name.replace(/"/g, '""')}"`,
+      lead.email,
+      `"${lead.need.replace(/"/g, '""')}"`,
+      lead.reason,
+      lead.createdAt,
+    ].join(",");
+    if (!fs.existsSync(CSV_FILE)) fs.writeFileSync(CSV_FILE, header);
+    fs.appendFileSync(CSV_FILE, row + "\n");
+  } catch (e) {
+    console.warn("CSV append skipped:", e);
+  }
 }
 
 const sinks = [createGoogleSheetsAdapter(), createHubSpotAdapter()];
@@ -70,24 +86,37 @@ export async function saveLead(input: LeadInput): Promise<LeadRecord> {
     createdAt: new Date().toISOString(),
   };
 
-  const database = getDb();
-  database
-    .prepare(
-      `INSERT INTO leads (id, bot_id, conversation_id, name, email, need, reason, created_at)
+  if (usingMemory()) {
+    memoryLeads.unshift(lead);
+    const conv = memoryConversations.get(lead.conversationId);
+    if (conv) {
+      conv.leadCaptured = true;
+      memoryConversations.set(lead.conversationId, conv);
+    }
+  } else {
+    const database = getDb();
+    database
+      .prepare(
+        `INSERT INTO leads (id, bot_id, conversation_id, name, email, need, reason, created_at)
        VALUES (@id, @botId, @conversationId, @name, @email, @need, @reason, @createdAt)`
-    )
-    .run({
-      id: lead.id,
-      botId: lead.botId,
-      conversationId: lead.conversationId,
-      name: lead.name,
-      email: lead.email,
-      need: lead.need,
-      reason: lead.reason,
-      createdAt: lead.createdAt,
-    });
+      )
+      .run({
+        id: lead.id,
+        botId: lead.botId,
+        conversationId: lead.conversationId,
+        name: lead.name,
+        email: lead.email,
+        need: lead.need,
+        reason: lead.reason,
+        createdAt: lead.createdAt,
+      });
 
-  appendCsv(lead);
+    appendCsv(lead);
+
+    database
+      .prepare(`UPDATE conversations SET lead_captured = 1 WHERE id = ?`)
+      .run(lead.conversationId);
+  }
 
   for (const sink of sinks) {
     if (sink.enabled) {
@@ -99,14 +128,14 @@ export async function saveLead(input: LeadInput): Promise<LeadRecord> {
     }
   }
 
-  database
-    .prepare(`UPDATE conversations SET lead_captured = 1 WHERE id = ?`)
-    .run(lead.conversationId);
-
   return lead;
 }
 
 export function listLeads(botId?: string): LeadRecord[] {
+  if (usingMemory()) {
+    const rows = botId ? memoryLeads.filter((l) => l.botId === botId) : memoryLeads;
+    return [...rows];
+  }
   const database = getDb();
   const rows = botId
     ? database.prepare(`SELECT * FROM leads WHERE bot_id = ? ORDER BY created_at DESC`).all(botId)
@@ -125,6 +154,22 @@ export function listLeads(botId?: string): LeadRecord[] {
 }
 
 export function getOrCreateConversation(id: string, botId: string): ConversationRecord {
+  if (usingMemory()) {
+    const existing = memoryConversations.get(id);
+    if (existing) return existing;
+    const now = new Date().toISOString();
+    const conv: ConversationRecord = {
+      id,
+      botId,
+      createdAt: now,
+      updatedAt: now,
+      messages: [],
+      leadCaptured: false,
+    };
+    memoryConversations.set(id, conv);
+    return conv;
+  }
+
   const database = getDb();
   const row = database.prepare(`SELECT * FROM conversations WHERE id = ?`).get(id) as
     | Record<string, string | number>
@@ -160,6 +205,15 @@ export function getOrCreateConversation(id: string, botId: string): Conversation
 }
 
 export function appendMessage(conversationId: string, message: ChatMessage): void {
+  if (usingMemory()) {
+    const conv = memoryConversations.get(conversationId);
+    if (!conv) return;
+    conv.messages.push(message);
+    conv.updatedAt = new Date().toISOString();
+    memoryConversations.set(conversationId, conv);
+    return;
+  }
+
   const database = getDb();
   const row = database.prepare(`SELECT * FROM conversations WHERE id = ?`).get(conversationId) as
     | Record<string, string>
@@ -174,14 +228,21 @@ export function appendMessage(conversationId: string, message: ChatMessage): voi
 }
 
 export function listConversations(botId?: string): ConversationRecord[] {
+  if (usingMemory()) {
+    const rows = [...memoryConversations.values()].sort((a, b) =>
+      b.updatedAt.localeCompare(a.updatedAt)
+    );
+    return (botId ? rows.filter((c) => c.botId === botId) : rows).slice(0, 100);
+  }
+
   const database = getDb();
   const rows = botId
     ? database
-      .prepare(`SELECT * FROM conversations WHERE bot_id = ? ORDER BY updated_at DESC LIMIT 100`)
-      .all(botId)
+        .prepare(`SELECT * FROM conversations WHERE bot_id = ? ORDER BY updated_at DESC LIMIT 100`)
+        .all(botId)
     : database
-      .prepare(`SELECT * FROM conversations ORDER BY updated_at DESC LIMIT 100`)
-      .all();
+        .prepare(`SELECT * FROM conversations ORDER BY updated_at DESC LIMIT 100`)
+        .all();
 
   return (rows as Record<string, string | number>[]).map((r) => ({
     id: r.id as string,
@@ -195,6 +256,8 @@ export function listConversations(botId?: string): ConversationRecord[] {
 
 /** Test helper */
 export function resetStoreForTests(): void {
+  memoryLeads.length = 0;
+  memoryConversations.clear();
   if (db) {
     db.close();
     db = null;
