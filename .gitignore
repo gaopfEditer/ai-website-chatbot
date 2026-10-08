@@ -8,3 +8,4 @@ data/conversations.db-journal
 *.log
 test-results
 playwright-report
+data/index/test-*.json
